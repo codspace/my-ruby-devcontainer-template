@@ -1,4 +1,4 @@
-name: 'Deploy Features'
+name: 'Deploy Template'
 on:
   push:
     tags:
@@ -10,14 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Get tag name
-        id: get_tag_name  
-        run: echo "::set-output name=tag::$(echo "${{ github.ref }}" | grep -oP 'refs/tags/\K(.+)')"
           
       - name: Publish dev container template
         uses: joshspicer/publish-dev-container-features-action@main
-#         with:
-#           path-to-features: '.'
+        with:
+          publish-features: "false"
+          publish-template: "true"
           
       - name: Get or Create Release at current tag
         uses: ncipollo/release-action@v1
